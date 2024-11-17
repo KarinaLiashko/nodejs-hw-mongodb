@@ -1,5 +1,8 @@
 //mongodb+srv://Karina:<db_password>@cluster0.3wgb8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 //mongodb+srv://Karina:<db_password>@cluster0.3wgb8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+//mongodb+srv://Karina:<db_password>@cluster0.3wgb8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+// mongodb+srv://Karina:<db_password>@cluster0.qobkq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 import mongoose from 'mongoose';
 import { env } from '../utils/env.js';
 

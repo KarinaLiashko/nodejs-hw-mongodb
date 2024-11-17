@@ -1,5 +1,5 @@
-import { startServer } from './server.js';
 import { initMongoDB } from './db/initMongoDB.js';
+import { startServer } from './server.js';
 
 const bootstrap = async () => {
   //спочатку підєднуємось до бази
@@ -8,3 +8,5 @@ const bootstrap = async () => {
   startServer();
 };
 bootstrap();
+
+//b9UdqDY6ofixIvtq
