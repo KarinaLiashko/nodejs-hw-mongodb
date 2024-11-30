@@ -50,8 +50,8 @@ export const upsertContactController = async (req, res) => {
   const status = result.isNew ? 201 : 200;
 
   res.status(status).json({
-    status: 200,
-    message: 'Contact updated successfully',
+    status,
+    message: 'Contact upserted successfully',
     data: result.data,
   });
 };
