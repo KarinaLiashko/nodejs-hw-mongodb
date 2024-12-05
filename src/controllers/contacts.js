@@ -2,8 +2,11 @@
 import * as contactServices from '../services/contacts.js';
 
 import createHttpError from 'http-errors';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 
 export const getContactsController = async (req, res) => {
+  const { page, perPage } = parsePaginationParams(req.query);
+
   const data = await contactServices.getContacts();
 
   res.json({
@@ -30,7 +33,6 @@ export const getContacByIdController = async (req, res) => {
 
 export const addContactController = async (req, res) => {
   const data = await contactServices.addContact(req.body);
-
   res.status(201).json({
     status: 201,
     message: 'Contact successfully added',
