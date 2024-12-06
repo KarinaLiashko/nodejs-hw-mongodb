@@ -19,12 +19,15 @@ contactsRouter.get(
   ctrlWrapper(contactsControllers.getContacByIdController),
 );
 
-contactsRouter.post('/', ctrlWrapper(contactsControllers.addContactController));
+contactsRouter.post(
+  '/',
+  validateBody(contactAddSchema),
+  ctrlWrapper(contactsControllers.addContactController),
+);
 
 contactsRouter.put(
   '/:id',
   isValidId,
-  validateBody(contactAddSchema),
   ctrlWrapper(contactsControllers.upsertContactController),
 );
 
