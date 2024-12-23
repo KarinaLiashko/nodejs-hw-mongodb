@@ -35,11 +35,14 @@ contactSchema.pre('findOneAndUpdate', setUpdateSettings);
 contactSchema.post('findOneAndUpdate', handleSaveError);
 
 export const sortByList = [
+  '_id',
   'name',
   'phoneNumber',
   'email',
   'isFavourite',
   'contactType',
+  'createdAt',
+  'updatedAt',
 ];
 
 const ContactCollection = model('contact', contactSchema);
