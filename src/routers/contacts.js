@@ -4,10 +4,7 @@ import * as contactsControllers from '../controllers/contacts.js';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import validateBody from '../utils/validateBody.js';
-import {
-  contactAddSchema,
-  contactUpdateSchema,
-} from '../validation/contacts.js';
+import { contactAddSchema } from '../validation/contacts.js';
 
 const contactsRouter = Router();
 
@@ -34,7 +31,6 @@ contactsRouter.put(
 contactsRouter.patch(
   '/:id',
   isValidId,
-  validateBody(contactUpdateSchema),
   ctrlWrapper(contactsControllers.patchContactController),
 );
 

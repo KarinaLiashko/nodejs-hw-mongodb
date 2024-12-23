@@ -2,9 +2,7 @@ const parseNumber = (number, defaultValue) => {
   if (typeof number !== 'string') return defaultValue;
 
   const parsedNumber = parseInt(number);
-  if (Number.isNaN(parseNumber)) return defaultValue;
-
-  return parsedNumber;
+  return Number.isNaN(parsedNumber) ? defaultValue : parsedNumber;
 };
 
 export const parsePaginationParams = ({ page, perPage }) => {
