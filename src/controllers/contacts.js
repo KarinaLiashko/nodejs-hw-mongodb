@@ -4,15 +4,15 @@ import * as contactServices from '../services/contacts.js';
 import createHttpError from 'http-errors';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
-import { sortByList } from '../db/models/Contacts.js';
-import { parseContactFilterParams } from '../utils/parseContactFilterParams.js';
+//import { sortByList } from '../db/models/Contacts.js';
+import { parseFilterParams } from '../utils/parseContactFilterParams.js';
 
-export const getContactsController = async (req, res) => {
+export const getContactsController = async (req, res, next) => {
   const { page, perPage } = parsePaginationParams(req.query);
-  const { sortBy, sortOrder } = parseSortParams(req.query, sortByList);
-  const filter = parseContactFilterParams(req.query);
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+  const filter = parseFilterParams(req.query);
 
-  const data = await contactServices.getContacts({
+  const contacts = await contactServices.getContacts({
     page,
     perPage,
     sortBy,
@@ -23,11 +23,11 @@ export const getContactsController = async (req, res) => {
   res.json({
     status: 200,
     message: `Contact successfully found`,
-    data,
+    data: contacts,
   });
 };
 
-export const getContacByIdController = async (req, res) => {
+export const getContacByIdController = async (req, res, next) => {
   const { id } = req.params;
   const data = await contactServices.getContactById(id);
 
@@ -42,7 +42,7 @@ export const getContacByIdController = async (req, res) => {
   });
 };
 
-export const addContactController = async (req, res) => {
+export const addContactController = async (req, res, next) => {
   const data = await contactServices.addContact(req.body);
   res.status(201).json({
     status: 201,
@@ -97,5 +97,7 @@ export const deleteContactController = async (req, res) => {
     throw createHttpError(404, `Contact with id=${_id} not found`);
   }
 
-  res.status(204).send();
+  res.status(204).json({
+    status: 204,
+  });
 };

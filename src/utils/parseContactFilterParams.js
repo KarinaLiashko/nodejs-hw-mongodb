@@ -1,20 +1,20 @@
-export const parseContactFilterParams = ({ type, isFavourite }) => {
-  const filters = {};
+const parseValue = (value) => {
+  const isString = typeof value === 'string';
 
-  if (type) {
-    filters.contactType = type;
-  }
+  if (!isString) return;
 
-  if (typeof isFavourite === 'boolean') {
-    filters.isFavourite = isFavourite;
-  } else if (typeof isFavourite === 'string') {
-    const lowerCaseValue = isFavourite.toLowerCase();
-    if (lowerCaseValue === 'true') {
-      filters.isFavourite = true;
-    } else if (lowerCaseValue === 'false') {
-      filters.isFavourite = false;
-    }
-  }
+  const isFavourite = (value) => ['true', 'false'].includes(value);
 
-  return filters;
+  if (isFavourite(value)) return value;
+  return;
+};
+
+export const parseFilterParams = (query) => {
+  const { isFavourite } = query;
+
+  const parsedIsFavourite = parseValue(isFavourite);
+
+  return {
+    isFavourite: parsedIsFavourite,
+  };
 };
