@@ -9,13 +9,14 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { logger } from './middlewares/logger.js';
 
-const PORT = Number(env('PORT', '3000'));
+const PORT = Number(env('PORT', 4000));
 
 export const startServer = () => {
   const app = express();
 
   app.use(cors());
   app.use(express.json());
+
   app.use(logger);
 
   app.use('/contacts', contactsRouter);
