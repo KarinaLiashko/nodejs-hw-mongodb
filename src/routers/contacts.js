@@ -6,7 +6,6 @@ import {
   getContactsController,
   patchContactController,
   addContactController,
-  upsertContactController,
 } from '../controllers/contacts.js';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 import { isValidId } from '../middlewares/isValidId.js';
@@ -32,12 +31,12 @@ contactsRouter.post(
   ctrlWrapper(addContactController),
 );
 
-contactsRouter.put(
-  '/contacts/:_id',
-  isValidId,
-  validateBody(contactAddSchema),
-  ctrlWrapper(upsertContactController),
-);
+//contactsRouter.put(
+// '/contacts/:_id',
+//  isValidId,
+//  validateBody(contactAddSchema),
+//  ctrlWrapper(upsertContactController),
+//);
 
 contactsRouter.patch(
   '/contacts/:_id',

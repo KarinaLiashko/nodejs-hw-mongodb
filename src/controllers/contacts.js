@@ -99,7 +99,7 @@ export const patchContactController = async (req, res, next) => {
   const result = await upsertContactController(_id, req.body);
 
   if (!result) {
-    next(createHttpError(404, `Contact with id=${_id} not found`));
+    next(createHttpError(404, 'Contact not found!'));
     return;
   }
 
@@ -116,7 +116,7 @@ export const deleteContactController = async (req, res, next) => {
   const data = await deleteContact(_id);
 
   if (!data) {
-    next(createHttpError(404, `Contact with id=${_id} not found`));
+    next(createHttpError(404, 'Contact not found!'));
     return;
   }
 
