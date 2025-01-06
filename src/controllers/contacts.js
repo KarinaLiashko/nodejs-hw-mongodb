@@ -75,39 +75,41 @@ export const upsertContactController = async (
   payload,
   options = {},
 ) => {
-  const rawResult = await ContactCollection.findOneAndUpdate(
-    { _id: contactId },
+  const updatedContact = await ContactCollection.findByIdAndUpdate(
+    contactId,
     payload,
     {
       new: true,
-      includeResultMetadata: true,
-      ...options,
+      upsert: options.upsert || false,
+      runValidators: true,
     },
   );
 
-  if (!rawResult || !rawResult.value) return null;
+  if (!updatedContact) return null;
 
   return {
-    contact: rawResult.value,
-    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+    contact: updatedContact,
+    isNew: options.upsert || false,
   };
 };
 
 export const patchContactController = async (req, res, next) => {
-  const { _id } = req.params;
+  try {
+    const { _id } = req.params;
 
-  const result = await upsertContactController(_id, req.body);
+    const result = await upsertContactController(_id, req.body);
 
-  if (!result) {
-    next(createHttpError(404, 'Contact not found!'));
-    return;
+    if (!result) {
+      return next(createHttpError(404, 'Contact not found!'));
+    }
+
+    res.status(200).json({
+      message: 'Contact patched successfully',
+      data: result.contact,
+    });
+  } catch (error) {
+    next(error);
   }
-
-  res.json({
-    status: 200,
-    message: 'Contact patched successfully',
-    data: result.contact,
-  });
 };
 
 export const deleteContactController = async (req, res, next) => {
