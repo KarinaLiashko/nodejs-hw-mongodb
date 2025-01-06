@@ -21,7 +21,7 @@ contactsRouter.get('/', ctrlWrapper(getContactsController));
 contactsRouter.get('/:_id', isValidId, ctrlWrapper(getContactByIdController));
 
 contactsRouter.post(
-  '/contacts',
+  '/',
   validateBody(contactAddSchema),
   ctrlWrapper(addContactController),
 );
@@ -34,16 +34,12 @@ contactsRouter.post(
 //);
 
 contactsRouter.patch(
-  '/contacts/:_id',
+  '/:_id',
   isValidId,
   validateBody(contactUpdateSchema),
   ctrlWrapper(patchContactController),
 );
 
-contactsRouter.delete(
-  '/contacts/:_id',
-  isValidId,
-  ctrlWrapper(deleteContactController),
-);
+contactsRouter.delete('/:_id', isValidId, ctrlWrapper(deleteContactController));
 
 export default contactsRouter;
