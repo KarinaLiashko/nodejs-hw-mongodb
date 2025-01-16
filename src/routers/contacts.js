@@ -11,8 +11,9 @@ import {
 const contactsRouter = Router();
 
 contactsRouter.get('/', ctrlWrapper(contactsControllers.getContactsController));
+
 contactsRouter.get(
-  '/:_id',
+  '/:id',
   isValidId,
   ctrlWrapper(contactsControllers.getContactByIdController),
 );
@@ -31,14 +32,14 @@ contactsRouter.put(
 );
 
 contactsRouter.patch(
-  '/:_id',
+  '/:id',
   isValidId,
   validateBody(contactUpdateSchema),
   ctrlWrapper(contactsControllers.patchContactController),
 );
 
 contactsRouter.delete(
-  '/:_id',
+  '/:id',
   isValidId,
   ctrlWrapper(contactsControllers.deleteContactController),
 );
