@@ -9,6 +9,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { logger } from './middlewares/logger.js';
 
+import authRouter from './routers/auth.js';
 const PORT = Number(env('PORT', '3000'));
 
 export const setupServer = () => {
@@ -19,6 +20,7 @@ export const setupServer = () => {
 
   app.use(logger);
 
+  app.use('/auth', authRouter);
   app.use('/contacts', contactsRouter);
 
   app.use('*', notFoundHandler);
